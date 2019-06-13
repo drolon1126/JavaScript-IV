@@ -3,14 +3,13 @@
   For this part of the assignment you will be implementing several
   constructor functions with their correct inheritance hierarchy.
 
-  In this file you will be creating three constructor functions: GameObject, CharacterStats, Humanoid.  
+  In this file you will be creating three constructor functions: GameObject, CharacterStats, Humanoid.
 
-  At the bottom of this file are 3 objects that all end up inheriting from Humanoid.  
+  At the bottom of this file are 3 objects that all end up inheriting from Humanoid.
   Use the objects at the bottom of the page to test your constructor functions.
   
   Each constructor function has unique properties and methods that are defined in their block comments below:
 */
-  
 /*
   === GameObject ===
   * createdAt
@@ -18,15 +17,16 @@
   * dimensions (These represent the character's size in the video game)
   * destroy() // prototype method that returns: `${this.name} was removed from the game.`
 */
-
-function GameObject(stats){
-  this.createdAt = stats.createdAt;
-  this.name = stats.name;
-  this.dimensions = stats.dimensions;
+class GameObject {
+  constructor(stats) {
+    this.createdAt = stats.createdAt;
+    this.name = stats.name;
+    this.dimensions = stats.dimensions;
+  }
+  destroy() {
+    return `${this.name} was removed from the game.`;
+  }
 }
-GameObject.prototype.destroy = function(){
-  return `${this.name} was removed from the game.`;
-};
 
 /*
   === CharacterStats ===
@@ -34,15 +34,16 @@ GameObject.prototype.destroy = function(){
   * takeDamage() // prototype method -> returns the string '<object name> took damage.'
   * should inherit destroy() from GameObject's prototype
 */
-function CharacterStats(stats){
-  GameObject.call(this, stats);
-  this.isChild = stats.isChild;
-  this.healthPoints = stats.healthPoints;
+class CharacterStats extends GameObject{
+  constructor(stats) {
+    super(stats);
+    this.isChild = stats.isChild;
+    this.healthPoints = stats.healthPoints;
+  }
+  takeDamage() {
+    return `${this.name} took damage.`;
+  }
 }
-CharacterStats.prototype = Object.create(GameObject.prototype);
-CharacterStats.prototype.takeDamage = function(){
-  return `${this.name} took damage.`;
-};
 
 /*
   === Humanoid (Having an appearance or character resembling that of a human.) ===
@@ -53,17 +54,18 @@ CharacterStats.prototype.takeDamage = function(){
   * should inherit destroy() from GameObject through CharacterStats
   * should inherit takeDamage() from CharacterStats
 */
-function Humanoid(stats){
-  CharacterStats.call(this, stats);
-  this.isChild = stats.isChild;
-  this.team = stats.team;
-  this.weapons = stats.weapons;
-  this.language = stats.language;
+class Humanoid extends CharacterStats{
+  constructor(stats) {
+    super(stats);
+    this.isChild = stats.isChild;
+    this.team = stats.team;
+    this.weapons = stats.weapons;
+    this.language = stats.language;
+  }
+  greet() {
+    return `${this.name} offers a greeting in ${this.language}.`;
+  }
 }
-Humanoid.prototype = Object.create(CharacterStats.prototype);
-Humanoid.prototype.greet = function(){
-  return `${this.name} offers a greeting in ${this.language}.`;
-};
  
 /*
   * Inheritance chain: GameObject -> CharacterStats -> Humanoid
@@ -136,46 +138,45 @@ Humanoid.prototype.greet = function(){
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 
 
-  // Stretch task: 
-  // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
-  // * Give the Hero and Villains different methods that could be used to remove health points 
-  //   from objects which could result in destruction if health gets to 0 or drops below 0;
-  // * Create two new objects, one a villain and one a hero and fight it out with methods!
-
-  function Affiliation(stats){
-    Humanoid.call(this, stats);
+// Stretch task: 
+// * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
+// * Give the Hero and Villains different methods that could be used to remove health points 
+//   from objects which could result in destruction if health gets to 0 or drops below 0;
+// * Create two new objects, one a villain and one a hero and fight it out with methods!
+class Affiliation extends Humanoid {
+  constructor(stats) {
+    super(stats);
     this.isChild = stats.isChild;
     this.isHero = stats.isHero;
     this.hurtMessages = stats.hurtMessages;
     this.strength = stats.strength;
   }
-  Affiliation.prototype = Object.create(Humanoid.prototype);
-  Affiliation.prototype.hurt = function(dmg){
+  hurt(dmg) {
     this.healthPoints--;
     console.log(`${this.name} has ${this.healthPoints} health left.`);
-    if(this.healthPoints<=0){
+    if (this.healthPoints <= 0) {
       return this.destroy();
     }
-    else{
+    else {
       return this.name + ': ' + this.hurtMessages[Math.floor(Math.random() * this.hurtMessages.length)];
     }
   }
-
-  Affiliation.prototype.attack = function(target){
+  attack(target) {
     let accuracy = Math.floor(Math.random() * 20) + 1;
-    console.log(`~~~~ ${this.name} is attacking ~~~~`)
-    if( accuracy > 10){
+    console.log(`~~~~ ${this.name} is attacking ~~~~`);
+    if (accuracy > 10) {
       console.log(`${this.name}'s attack hits ${target.name}, dealing ${this.strength} points of damage.`);
-      if(accuracy===20)
-        return target.hurt(this.strength*2);
+      if (accuracy === 20)
+        return target.hurt(this.strength * 2);
       else
         return target.hurt(this.strength);
     }
-    else{
+    else {
       //target.miss();
       return `${this.name}'s attack misses.`;
     }
   }
+}
 
   const hero = new Affiliation({
     createdAt: new Date(),
