@@ -23,20 +23,9 @@ class Instructor extends Person{
     console.log(`${obj.name} receives a perfect score on ${sbj}`);
   }
   adjustGrade(obj){
-    let rand =  Math.floor(Math.random()*20);
-    if(Math.random()<=0.5){
-      obj.grade +=rand;
-      if(obj.grade>100){
-        obj.grade=100;
-      }
-    }
-    else{
-      rand = -rand;
-      obj.grade +=rand;
-      if(obj.grade<0){
-        obj.grade=0;
-      }
-    }
+    let rand =  Math.floor(Math.random() * (40) - 20);
+    obj.grade += rand;
+    
     return rand;
   }
 }
