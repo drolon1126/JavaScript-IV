@@ -55,3 +55,62 @@ class ProjectManager extends Instructor{
   }
 }
 
+const dan = new Instructor({
+  name:'Dan',
+  age:30,
+  location:'Earth',
+  specialty:'Yes',
+  favLanguage:'Javascript',
+  catchPhrase:'Beep boop!',
+});
+
+const josh = new Instructor({
+  name:'Josh',
+  age:37,
+  location:'America',
+  specialty:'Banjo',
+  favLanguage:'placeholder',
+  catchPhrase:'-Makes banjo noises-',
+});
+
+const mary = new ProjectManager({
+  name:'Josh',
+  age:20,
+  location:'America',
+  specialty:'Lamb slaughter',
+  favLanguage:'animu',
+  catchPhrase:'I\'m Ebul',
+  gradClassName:'web17',
+  favInstructor:'Josh'
+});
+
+const nick = new ProjectManager({
+  name:'Josh',
+  age:29,
+  location:'America',
+  specialty:'Banjo',
+  favLanguage:'placeholder',
+  catchPhrase:'Words are said',
+  gradClassName:'web17',
+  favInstructor:'Josh'
+});
+
+const patrick = new ProjectManager({
+  name:'Patrick',
+  age:24,
+  location:'America',
+  previousBackground:'none',
+  className:'web21',
+  favSubjects:['English','Math']
+});
+
+const jane = new ProjectManager({
+  name:'Jane',
+  age:32,
+  location:'America',
+  previousBackground:'Dancer',
+  className:'web21',
+  favSubjects:['Art','CSS']
+});
+
+
