@@ -11,6 +11,7 @@ class Person{
 
 class Instructor extends Person{
   constructor(prop){
+    super(prop);
     this.specialty=prop.specialty;
     this.favLanguage=prop.favLanguage;
     this.catchPhrase=prop.catchPhrase;
@@ -25,6 +26,7 @@ class Instructor extends Person{
 
 class Student extends Person{
   constructor(prop){
+    super(prop);
     this.previousBackground=prop.previousBackground;
     this.className=prop.className;
     this.favSubjects=prop.favSubjects;
@@ -44,6 +46,7 @@ class Student extends Person{
 
 class ProjectManager extends Instructor{
   constructor(prop){
+    super(prop);
     this.gradClassName=prop.gradClassName;
     this.favInstructor=prop.favInstructor;
   }
@@ -74,7 +77,7 @@ const josh = new Instructor({
 });
 
 const mary = new ProjectManager({
-  name:'Josh',
+  name:'Mary',
   age:20,
   location:'America',
   specialty:'Lamb slaughter',
@@ -85,7 +88,7 @@ const mary = new ProjectManager({
 });
 
 const nick = new ProjectManager({
-  name:'Josh',
+  name:'Nick',
   age:29,
   location:'America',
   specialty:'Banjo',
@@ -95,16 +98,16 @@ const nick = new ProjectManager({
   favInstructor:'Josh'
 });
 
-const patrick = new ProjectManager({
+const patrick = new Student({
   name:'Patrick',
   age:24,
   location:'America',
-  previousBackground:'none',
+  previousBackground:'Designer',
   className:'web21',
   favSubjects:['English','Math']
 });
 
-const jane = new ProjectManager({
+const jane = new Student({
   name:'Jane',
   age:32,
   location:'America',
@@ -112,5 +115,75 @@ const jane = new ProjectManager({
   className:'web21',
   favSubjects:['Art','CSS']
 });
+
+console.log(dan.name);
+console.log(dan.age);
+console.log(dan.location);
+console.log(dan.specialty);
+console.log(dan.favLanguage);
+console.log(dan.catchPhrase);
+dan.speak();
+dan.demo('constructors');
+dan.grade(patrick,'CSS');
+
+console.log(josh.name);
+console.log(josh.age);
+console.log(josh.location);
+console.log(josh.specialty);
+console.log(josh.favLanguage);
+console.log(josh.catchPhrase);
+josh.speak();
+josh.demo('Arrays');
+josh.grade(jane,'HTML');
+
+console.log(mary.name);
+console.log(mary.age);
+console.log(mary.location);
+console.log(mary.specialty);
+console.log(mary.favLanguage);
+console.log(mary.catchPhrase);
+console.log(mary.gradClassName);
+console.log(mary.favInstructor);
+mary.speak();
+mary.demo('Arrays');
+mary.grade(jane,'HTML');
+mary.standup('PM-Group');
+mary.debugsCode(jane,'Javascript');
+
+console.log(nick.name);
+console.log(nick.age);
+console.log(nick.location);
+console.log(nick.specialty);
+console.log(nick.favLanguage);
+console.log(nick.catchPhrase);
+console.log(nick.gradClassName);
+console.log(nick.favInstructor);
+nick.speak();
+nick.demo('Arrays');
+nick.grade(jane,'HTML');
+nick.standup('PM-Group');
+nick.debugsCode(jane,'Javascript');
+
+console.log(patrick.name);
+console.log(patrick.age);
+console.log(patrick.location);
+console.log(patrick.previousBackground);
+console.log(patrick.className);
+console.log(patrick.favSubjects);
+patrick.speak();
+patrick.listSubjects();
+patrick.prAssignment('javascript');
+patrick.sprintChallenge('javascript');
+
+console.log(jane.name);
+console.log(jane.age);
+console.log(jane.location);
+console.log(jane.previousBackground);
+console.log(jane.className);
+console.log(jane.favSubjects);
+jane.speak();
+jane.listSubjects();
+jane.prAssignment('javascript');
+jane.sprintChallenge('javascript');
 
 
