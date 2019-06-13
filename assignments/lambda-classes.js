@@ -42,3 +42,16 @@ class Student extends Person{
   }
 }
 
+class ProjectManager extends Instructor{
+  constructor(prop){
+    this.gradClassName=prop.gradClassName;
+    this.favInstructor=prop.favInstructor;
+  }
+  standup(chnl){
+    console.log(`${this.name} announces to ${chnl}, @channel standy times!`);
+  }
+  debugsCode(obj, sbj){
+    console.log(`${this.name} debugs ${obj.name}'s code on ${sbj}.`);
+  }
+}
+
