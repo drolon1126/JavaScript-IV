@@ -22,6 +22,23 @@ class Instructor extends Person{
   grade(obj,sbj){
     console.log(`${obj.name} receives a perfect score on ${sbj}`);
   }
+  adjustGrade(obj){
+    let rand =  Math.floor(Math.random()*20);
+    if(Math.random()<=0.5){
+      obj.grade +=rand;
+      if(obj.grade>100){
+        obj.grade=100;
+      }
+    }
+    else{
+      rand = -rand;
+      obj.grade +=rand;
+      if(obj.grade<0){
+        obj.grade=0;
+      }
+    }
+    return rand;
+  }
 }
 
 class Student extends Person{
@@ -30,6 +47,7 @@ class Student extends Person{
     this.previousBackground=prop.previousBackground;
     this.className=prop.className;
     this.favSubjects=prop.favSubjects;
+    this.grade=prop.grade;
   }
   listSubjects(){
     this.favSubjects.forEach(element => {
@@ -41,6 +59,14 @@ class Student extends Person{
   }
   sprintChallenge(sbj){
     console.log(`${this.name} has begun sprint challenge on ${sbj}.`);
+  }
+  graduate(){
+    if(this.grade>=70){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 }
 
@@ -104,7 +130,8 @@ const patrick = new Student({
   location:'America',
   previousBackground:'Designer',
   className:'web21',
-  favSubjects:['English','Math']
+  favSubjects:['English','Math'],
+  grade:1
 });
 
 const jane = new Student({
@@ -113,7 +140,8 @@ const jane = new Student({
   location:'America',
   previousBackground:'Dancer',
   className:'web21',
-  favSubjects:['Art','CSS']
+  favSubjects:['Art','CSS'],
+  grade:1
 });
 
 console.log(dan.name);
@@ -181,9 +209,15 @@ console.log(jane.location);
 console.log(jane.previousBackground);
 console.log(jane.className);
 console.log(jane.favSubjects);
+console.log(jane.grade);
 jane.speak();
 jane.listSubjects();
 jane.prAssignment('javascript');
 jane.sprintChallenge('javascript');
 
-
+while(!jane.graduate()){
+  console.log(`${dan.name} adjusted ${jane.name}'s grade by ${dan.adjustGrade(jane)}. It is now ${jane.grade}`);
+}
+if(jane.graduate()){
+  console.log(`${jane.name} has graduated.`);
+}
