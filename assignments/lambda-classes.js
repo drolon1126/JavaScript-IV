@@ -1,3 +1,4 @@
+
 class Person{
   constructor(prop){
     this.name=prop.name;
@@ -25,7 +26,13 @@ class Instructor extends Person{
   adjustGrade(obj){
     let rand =  Math.floor(Math.random() * (40) - 20);
     obj.grade += rand;
-    
+    if(obj.grade<0){
+      obj.grade = 0;
+    }
+    else if(obj.grade>100){
+      obj.grade = 100;
+    }
+
     return rand;
   }
 }
